@@ -16,16 +16,23 @@ def all_houses(filename):
     """
     data = open(filename)
 
-    houses = set()
+    houses = []
 
     # TODO: replace this with your code
-    for line in filename:
+    for line in data:
+      line.rstrip()
       list = line.split('|')
 
-      houses = set(list[2])
+      house = list[2]
+
+      if house != '':
+        houses.append(house)
 
 
-    return houses
+
+    data.close()
+
+    return set(houses)
 
 
 def students_by_cohort(filename, cohort='All'):
@@ -55,10 +62,32 @@ def students_by_cohort(filename, cohort='All'):
     Return:
       - list[list]: a list of lists
     """
+    file = open(filename)
 
     students = []
 
     # TODO: replace this with your code
+
+    for line in file:
+      line = line.rstrip('\r\n')
+      data = line.split('|')
+      # print(f'Data: {data[4]}')
+      # print(f'Cohort: {cohort}')
+      if cohort == data[4]:
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        students.append(full_name)
+      elif cohort == 'All' and data[4] != 'G' and data[4] != 'I':
+
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        students.append(full_name)
+
+    file.close()
 
     return sorted(students)
 
@@ -104,7 +133,77 @@ def all_names_by_house(filename):
 
     # TODO: replace this with your code
 
-    return []
+    file = open(filename)
+
+    names_by_house = []
+
+    for line in file:
+      line = line.rstrip('\r\n')
+      data = line.split('|')
+
+      # print(data)
+
+      #if data[-1] == 'G', goes into ghosts list
+      if data[-1] == 'G':
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        ghosts.append(full_name)
+
+      #if data [-1] == 'I', goes into instructors list
+      elif data[-1] == 'I':
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        instructors.append(full_name)
+
+      #else if data[2] == 'Gryffindor', goes in gry
+      elif data[2] == 'Gryffindor':
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        gryffindor.append(full_name)
+
+      elif data[2] == "Hufflepuff":
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        hufflepuff.append(full_name)
+
+      elif data[2] == "Dumbledore's Army":
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        dumbledores_army.append(full_name)
+
+      elif data[2] == "Ravenclaw":
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        ravenclaw.append(full_name)
+
+      elif data[2] == "Slytherin":
+        first_name = data[0]
+        last_name = data[1]
+        full_name = first_name + ' ' + last_name
+
+        slytherin.append(full_name)
+
+
+      # first_name = data[0]
+      #   last_name = data[1]
+      #   full_name = first_name + ' ' + last_name
+
+
+    file.close()
+
+    return [sorted(dumbledores_army), sorted(gryffindor), sorted(hufflepuff), sorted(ravenclaw), sorted(slytherin), sorted(ghosts), sorted(instructors)]
 
 
 def all_data(filename):
@@ -126,9 +225,18 @@ def all_data(filename):
       - list[tuple]: a list of tuples
     """
 
+    file = open(filename)
+
     all_data = []
 
+    for line in file:
+      line = line.rstrip('\r\n')
+      data = line.split('|')
+
+
     # TODO: replace this with your code
+
+    file.close()
 
     return all_data
 
