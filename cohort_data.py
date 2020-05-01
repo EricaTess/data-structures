@@ -14,10 +14,16 @@ def all_houses(filename):
     Return:
       - set[str]: a set of strings
     """
+    data = open(filename)
 
     houses = set()
 
     # TODO: replace this with your code
+    for line in filename:
+      list = line.split('|')
+
+      houses = set(list[2])
+
 
     return houses
 
