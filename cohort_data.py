@@ -232,7 +232,14 @@ def all_data(filename):
     for line in file:
       line = line.rstrip('\r\n')
       data = line.split('|')
+      full_name = data[0] + ' ' + data[1]
 
+      data[0] = full_name
+      data.pop(1)
+      # print(data)
+      
+      data = tuple(data)
+      all_data.append(data)
 
     # TODO: replace this with your code
 
@@ -263,6 +270,21 @@ def get_cohort_for(filename, name):
     """
 
     # TODO: replace this with your code
+    file = open(filename)
+
+    for line in file:
+      line = line.rstrip('\r\n')
+      data = line.split('|')
+
+      full_name = data[0] + ' ' + data[1]
+
+      if name != full_name:
+        None
+      elif name == full_name:
+        cohort = data[-1]
+        return cohort
+
+    file.close()
 
 
 def find_duped_last_names(filename):
@@ -280,6 +302,26 @@ def find_duped_last_names(filename):
     """
 
     # TODO: replace this with your code
+    file = open(filename)
+
+    duplicates = set()
+    last_names = set()
+
+    for line in file:
+      line = line.rstrip('\r\n')
+      data = line.split('|')
+
+      last_name = data[1]
+
+      if last_name in last_names:
+        duplicates.add(last_name)
+
+      last_names.add(last_name)
+
+
+    file.close()
+
+    return duplicates
 
 
 def get_housemates_for(filename, name):
